@@ -1,0 +1,44 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About · The Keeper Index</title><meta name="description" content="Purpose, author, disclosure, and frequently asked questions for the Keeper Index.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">The Keeper <em>Index</em></a><nav class="main"><a href="index.html" class="">Overview</a><a href="rankings.html" class="">Rankings</a><a href="methodology.html" class="">Methodology</a><a href="lessons.html" class="">Lessons from other sports</a><a href="data.html" class="">Data</a><a href="about.html" class="on">About</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+<p class="kicker">About</p>
+<h1>Why this exists, who built it, and <em>what it is not</em></h1>
+</div></div>
+<section><div class="wrap narrow">
+<h2>Purpose</h2>
+<p>Field hockey has no public goalkeeper rating. The statistics the sport publishes were designed for box scores, not evaluation, and three of the five reward the defense more than the keeper. The Keeper Index is a first attempt at a rating that measures the keeper, built only from published data so that anyone can reproduce or dispute it. It is offered to coaches, players, parents, and the people who vote on all-conference teams, as a better starting point than goals-against average.</p>
+
+<h2 id="disclosure">Disclosure</h2>
+<div class="card crimson">
+<p>The author's daughter is a Division I goalkeeper and appears in these rankings. The project exists because of her. It is also a conflict of interest.</p>
+<p>Three safeguards. First, the method was specified in full before the rankings were produced, and no factor, weight, or population rule was changed after seeing where any keeper landed. Second, every variant that was built is published, including the goals-against version that ranks her 24th, so a reader can see what the alternatives say. Third, the rating is tested against an external standard (correlation with the RPI team ranking) that has nothing to do with any individual keeper, and that test is what drove the choice of factors.</p>
+<p>Readers should still apply a discount. The strongest reply to this disclosure is to download the data and run a different method.</p>
+</div>
+
+<h2>Author</h2>
+<p>John McKinley is a technology executive and investor. His background is in large-scale data systems, not sports analytics; this project applies the standard tools of that field (rank aggregation, expected-value baselines, correlation tests against a known confound) to a sport that has not had them applied. Corrections and better methods are welcome through the <a href="https://github.com/jmckinley/fh-goalkeeper-ratings/issues">GitHub repository</a>.</p>
+
+<h2>Frequently asked</h2>
+<dl class="faq">
+<dt>Why not just use save percentage?</dt>
+<dd>Save percentage is the best single published statistic and it is a factor here. On its own it ignores workload (a .790 on 50 shots and a .790 on 130 shots are not the same season), schedule, and shot quality. The rating adds the first two. The third is waiting on data.</dd>
+<dt>Does this say keeper A is better than keeper B?</dt>
+<dd>It says keeper A performed better than keeper B this season on four measures that do not reward team defense. With 16 games and 44 to 299 shots per keeper, that is a statement about a season, not about talent. Ice hockey's experience is that keeper performance is among the noisiest things in sport to measure.</dd>
+<dt>Why equal weights?</dt>
+<dd>Because any other weighting is a choice that can be tuned toward a desired result, and this project cannot afford that appearance. Equal weights are the only scheme with no free parameters.</dd>
+<dt>Why is strength of schedule a factor if it correlates with team quality?</dt>
+<dd>It enters as a credit, not a penalty. A keeper on a strong team gets credit for the strong schedule her team played, which offsets some of what she loses on workload. Without it, the rating would tilt toward keepers on weak teams who face many shots from weak opponents.</dd>
+<dt>Why no shutouts, wins, or GAA?</dt>
+<dd>Shutouts and wins are team outcomes. GAA was tested and rejected; the methodology page shows the result.</dd>
+<dt>Will this be updated?</dt>
+<dd>Yes. The current release covers the 2026 regular season. Prior seasons and a per-60 version are planned, and the methodology page lists the roadmap. The method is versioned; v1.0 results will remain available when v1.1 is published.</dd>
+</dl>
+<p class="sig">Version 1.0 · November 2026</p>
+</div></section>
+
+<footer><div class="wrap">The Keeper Index · Composite goalkeeper performance ratings for NCAA Division I field hockey · 2026 season, data through Nov. 3<br>
+Sources: <a href="https://www.ncaa.com/stats/fieldhockey/d1/current/individual/444">NCAA individual statistics</a>, <a href="https://www.ncaa.com/rankings/fieldhockey/d1/ncaa-field-hockey-rpi">NCAA RPI</a>, NCAA D1 scoreboard results · Built by John McKinley · <a href="about.html#disclosure">Disclosure</a> · <a href="data.html">Download the data</a> · <a href="https://github.com/jmckinley/fh-goalkeeper-ratings">Source on GitHub</a></div></footer>
+</body></html>

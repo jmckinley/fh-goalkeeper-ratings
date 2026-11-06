@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data · The Keeper Index</title><meta name="description" content="Download the full ratings, strength-of-schedule table, and season results file, with instructions to reproduce the rating.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">The Keeper <em>Index</em></a><nav class="main"><a href="index.html" class="">Overview</a><a href="rankings.html" class="">Rankings</a><a href="methodology.html" class="">Methodology</a><a href="lessons.html" class="">Lessons from other sports</a><a href="data.html" class="on">Data</a><a href="about.html" class="">About</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+<p class="kicker">Data · Reproducibility</p>
+<h1>Everything needed to <em>check the work</em></h1>
+<p class="lede">All inputs, all intermediate values, and all five rating variants in one file. If the rating is wrong, the data to show it is here.</p>
+</div></div>
+<section><div class="wrap narrow">
+<h2>Downloads</h2>
+<p><a class="btn" href="data/ratings_2026.csv" download>ratings_2026.csv</a><a class="btn" href="data/ratings_2026.json" download>ratings_2026.json</a><a class="btn ghost" href="data/team_sos_2026.csv" download>team_sos_2026.csv</a><a class="btn ghost" href="data/results_2026.csv" download>results_2026.csv</a></p>
+<h3>ratings_2026 (80 rows)</h3>
+<p>One row per qualifying keeper. Columns: rank and sum under each variant (<code>rank_v4</code>, <code>sum_v4</code>, <code>rank_v3</code>, <code>rank_v3s</code>, <code>rank_vga</code>, <code>rank_vadj</code>), the z-score rank for the primary variant (<code>zr_v4</code>), raw inputs (<code>g</code>, <code>min</code>, <code>shots</code>, <code>saves</code>, <code>ga</code>), derived values (<code>pct</code>, <code>sfpg</code>, <code>spg</code>, <code>gapg</code>, <code>xga</code>, <code>gsaa</code>, <code>gsaapg</code>, <code>sos</code>), national rank on each factor (<code>r_*</code>), team record, conference, and RPI rank. The JSON file also carries the league-average save percentage and a summary block for each variant with its RPI correlation and top-ten composition.</p>
+<h3>team_sos_2026 (86 rows)</h3>
+<p>Strength of schedule and record for every Division I team, from the results file, using the NCAA RPI formula.</p>
+<h3>results_2026 (690 rows)</h3>
+<p>Every Division I result from Aug. 28 through Nov. 3, 2026: date, both teams, both scores. Scraped from the NCAA scoreboard. This is the input to SOS and to the opponent-adjusted variant.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.ncaa.com/stats/fieldhockey/d1/current/individual/444">NCAA D1 save percentage leaders</a> (saves, goals against, minutes, games)</li>
+<li><a href="https://www.ncaa.com/stats/fieldhockey/d1/current/individual/431">NCAA D1 saves per game leaders</a> (population definition)</li>
+<li><a href="https://www.ncaa.com/rankings/fieldhockey/d1/ncaa-field-hockey-rpi">NCAA D1 RPI</a> (team RPI rank, conference, record; used only for the validation test, not as a factor)</li>
+<li><a href="https://www.ncaa.com/scoreboard/fieldhockey/d1/2026/10/31">NCAA D1 scoreboard</a> (daily results, Aug. 28 to Nov. 3)</li>
+</ul>
+
+<h2>Reproducing the rating</h2>
+<ol>
+<li>Take the 80 keepers present on both NCAA leaderboards. Record games, saves, goals against.</li>
+<li>Compute shots = saves + GA; SV% = saves / shots; SOG/G = shots / games.</li>
+<li>Compute the league-average save percentage as total saves / total shots across the 80 (0.712 for 2026). Expected GA = shots × (1 − that figure). GSAA = expected − actual. GSAA/G = GSAA / games.</li>
+<li>From the results file, compute each team's SOS: two-thirds opponents' winning percentage (excluding games against the rated team, ties as half a win) plus one-third opponents' opponents' winning percentage.</li>
+<li>Rank all 80 on each of SV%, SOG/G, GSAA/G, SOS (higher is better for all four). Add the four ranks. Sort ascending; break ties on SV%.</li>
+</ol>
+<p>Validation: compute the Spearman correlation between the resulting rank and the team's RPI rank. The 2026 figure is 0.252. Repeat with GA/G in place of GSAA/G and the figure should rise to roughly 0.79.</p>
+<p class="small">The scraping and computation code is in the <a href="https://github.com/jmckinley/fh-goalkeeper-ratings">GitHub repository</a>.</p>
+</div></section>
+
+<footer><div class="wrap">The Keeper Index · Composite goalkeeper performance ratings for NCAA Division I field hockey · 2026 season, data through Nov. 3<br>
+Sources: <a href="https://www.ncaa.com/stats/fieldhockey/d1/current/individual/444">NCAA individual statistics</a>, <a href="https://www.ncaa.com/rankings/fieldhockey/d1/ncaa-field-hockey-rpi">NCAA RPI</a>, NCAA D1 scoreboard results · Built by John McKinley · <a href="about.html#disclosure">Disclosure</a> · <a href="data.html">Download the data</a> · <a href="https://github.com/jmckinley/fh-goalkeeper-ratings">Source on GitHub</a></div></footer>
+</body></html>

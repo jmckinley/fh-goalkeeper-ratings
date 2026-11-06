@@ -1,0 +1,77 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Methodology · The Keeper Index</title><meta name="description" content="How the Keeper Index is built: four factors, rank-sum aggregation, and the alternatives that were tested and rejected.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">The Keeper <em>Index</em></a><nav class="main"><a href="index.html" class="">Overview</a><a href="rankings.html" class="">Rankings</a><a href="methodology.html" class="on">Methodology</a><a href="lessons.html" class="">Lessons from other sports</a><a href="data.html" class="">Data</a><a href="about.html" class="">About</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+<p class="kicker">Methodology · Version 1.0</p>
+<h1>How the rating <em>is built</em></h1>
+<p class="lede">Four published or derivable statistics, ranked nationally, added together. The design rule was that no factor may reward the defense in front of the keeper more than it rewards the keeper, and every candidate factor was tested against that rule before it was included.</p>
+</div></div>
+<section><div class="wrap narrow">
+<div class="toc"><a href="#population">Population</a> · <a href="#f1">Save percentage</a> · <a href="#f2">Shots faced</a> · <a href="#f3">Goals saved above average</a> · <a href="#f4">Strength of schedule</a> · <a href="#combine">Combining</a> · <a href="#tested">What was tested and rejected</a> · <a href="#limits">Limitations</a> · <a href="#roadmap">Roadmap</a></div>
+
+<h2 id="population">Population</h2>
+<p>The 80 goalkeepers who appear on both the NCAA Division I save-percentage and saves-per-game leaderboards for the 2026 regular season. The NCAA applies a minimum-minutes threshold to those lists (roughly half of team minutes), which excludes backups and platoon keepers whose samples are too small to rate. A keeper who appears on only one of the two lists is excluded. Statistics are as published through games of Nov. 3, 2026, which is the end of the regular season for most conferences.</p>
+
+<h2 id="f1">Factor 1 · Save percentage</h2>
+<p>Saves divided by shots on goal faced, as published by the NCAA. This is the efficiency measure: of the shots that reached the keeper, how many did she stop. It is the single best published goalkeeper statistic and the only one of the NCAA's five that is not dominated by team defense. Its weakness is that it treats every shot as equal. A keeper facing a penalty-corner drag flick and a keeper facing an open-play tip from a tight angle are scored the same. Field hockey does not publish shot location, so this cannot be corrected yet; <a href="lessons.html">the lessons page</a> covers what ice hockey and soccer did once they had the data.</p>
+
+<h2 id="f2">Factor 2 · Shots on goal faced per game</h2>
+<p>Saves plus goals against, divided by games played. This is the workload measure: how much the keeper was asked to do. It is used instead of saves per game because saves per game partly re-counts efficiency (a keeper with a higher save percentage records more saves on the same shots). Shots faced is pure workload; two keepers who face the same shots score the same here regardless of how many they stop, and the save-percentage factor then separates them.</p>
+<p>Workload belongs in a goalkeeper rating because a save percentage earned on 130 shots is more informative than one earned on 50, and because a keeper who is tested nine times a game and holds up is doing something a keeper tested four times a game is not being asked to do.</p>
+
+<h2 id="f3">Factor 3 · Goals saved above average per game</h2>
+<p>The goals-prevented measure, and the one that required the most care. The formula:</p>
+<div class="formula">expected GA  =  shots on goal faced  ×  (1 − league-average save percentage)
+GSAA         =  expected GA  −  actual GA
+GSAA / G     =  GSAA  ÷  games played
+
+league-average save percentage, 2026, 80 qualifiers  =  0.712
+expected goals per shot on goal                      =  0.288</div>
+<p>A keeper with +0.50 GSAA per game allowed half a goal per game fewer than an average keeper would have on the same shots. A keeper at 0.00 performed exactly as an average keeper would have. The figure is charged only on shots that reached the keeper, so a defense that concedes four shots a game cannot produce a high GSAA for her; it can only limit how much she can earn.</p>
+<p>This is the field hockey equivalent of ice hockey's goals saved above expected (GSAx), with one difference: GSAx assigns each shot its own expected-goal value from a model of shot location, angle, and type, where this uses a flat league-average value for every shot. That is the best available without shot-location data, and it is the same construction ice hockey used before location tracking arrived in 2007.</p>
+
+<h2 id="f4">Factor 4 · Strength of schedule</h2>
+<p>Computed from every Division I result from Aug. 28 through Nov. 3, 2026 (690 games) using the NCAA's RPI strength-of-schedule formula:</p>
+<div class="formula">SOS  =  (2/3) × opponents' winning percentage
+      + (1/3) × opponents' opponents' winning percentage
+
+opponents' records exclude games against the rated team
+ties count as half a win</div>
+<p>This is the same formula the NCAA selection committee uses, applied to the same results. It is attributed to the keeper's team, not to the games she personally played; given the minutes threshold, the difference is small. Schedule belongs in the rating because both efficiency and workload are easier to accumulate against weak opponents, and because conference schedules in Division I field hockey vary enormously: the hardest schedule in the population rates .633 and the easiest .382.</p>
+
+<h2 id="combine">Combining the factors</h2>
+<h3>Rank-sum (primary)</h3>
+<p>Each keeper is ranked 1 to 80 on each factor. The four ranks are added. The lowest total ranks first; ties are broken by save percentage. Equal weighting is deliberate. There is no principled basis for weighting workload over efficiency, or schedule over either, and any weighting scheme is a thumb on the scale. The rank-sum also caps the influence of outliers: a keeper who faces 19 shots a game gets rank 1 on workload, not a score three times the next keeper's.</p>
+<h3>Z-score (check)</h3>
+<p>Each factor is converted to standard deviations above or below the population mean and the four are summed. This preserves the size of gaps, so an extreme value on one factor can carry a keeper. It is reported in the <a href="data.html">data file</a> as a check on the primary method. The two methods agree on the top three and differ mainly in how far down the table they place the high-volume, low-efficiency keepers.</p>
+
+<h2 id="tested">What was tested and rejected</h2>
+<p>The test for every candidate factor was the same: build the composite with it, then measure how closely the result tracks the NCAA RPI team ranking. A goalkeeper rating that reproduces the team ranking is not measuring the goalkeeper. Two statistics were measured: Spearman rank correlation between the composite rank and the team's RPI rank, and the number of top-ten keepers from RPI top-20 programs.</p>
+<div class="tablewrap"><table class="compare"><thead><tr><th>Rating</th><th>ρ vs RPI</th><th></th><th>Top 10 from RPI top 20</th><th>Top 10 from losing teams</th></tr></thead><tbody><tr><td>Four-factor (primary): SV%, SOG/G, GSAA/G, SOS</td><td class="num">0.25</td><td><div class="bar "><i style="width:25%"></i></div></td><td class="num">4 / 10</td><td class="num">3 / 10</td></tr><tr><td>Three-factor: SV%, SOG/G, SOS</td><td class="num">0.28</td><td><div class="bar "><i style="width:28%"></i></div></td><td class="num">4 / 10</td><td class="num">2 / 10</td></tr><tr><td>Three-factor: SV%, saves/G, SOS</td><td class="num">0.29</td><td><div class="bar "><i style="width:28%"></i></div></td><td class="num">5 / 10</td><td class="num">1 / 10</td></tr><tr><td>Rejected: SV%, SOG/G, opponent-adjusted GA/G, SOS</td><td class="num">0.65</td><td><div class="bar bad"><i style="width:64%"></i></div></td><td class="num">7 / 10</td><td class="num">1 / 10</td></tr><tr><td>Rejected: SV%, GA/G, SOS</td><td class="num">0.79</td><td><div class="bar bad"><i style="width:78%"></i></div></td><td class="num">10 / 10</td><td class="num">0 / 10</td></tr></tbody></table></div>
+<p><strong>Goals against per game</strong> (the natural choice, and the statistic coaches cite most) produced a rating with correlation 0.79 to RPI and a top ten made up entirely of keepers from top-20 programs. It was rejected. <strong>Opponent-adjusted goals against</strong> (expected goals from each opponent's scoring rate against everyone else, minus actual) was an improvement at 0.65 but still filled seven of ten top spots from top-20 programs, because it adjusts for the opponents' attack without adjusting for the keeper's own defense. It was rejected. <strong>Goals saved above average</strong>, charged only on shots that reached the keeper, brought the correlation to 0.25, in line with the three-factor versions that have no goals component at all. It was kept.</p>
+<p>For reference, the individual factors' correlations with RPI: save percentage 0.23, GSAA per game 0.19, shots faced per game −0.67 (more shots, worse team), goals against per game 0.69, strength of schedule 0.85. SOS is the one factor that intentionally tracks team quality, since good teams tend to schedule good teams, and it enters the rating as a credit to the keeper rather than a penalty.</p>
+
+<h2 id="limits">Limitations</h2>
+<ul>
+<li><strong>Shot quality is not measured.</strong> Every shot on goal carries the same expected value. This is the largest gap between this rating and the current state of the art in ice hockey and soccer, and it cannot be closed until field hockey publishes shot location or shot type (penalty corner, penalty stroke, open play).</li>
+<li><strong>Sample sizes are small.</strong> Keepers in this population faced between 44 and 299 shots. Ice hockey analysts treat save percentage as unreliable below roughly 1,500 shots. The rating describes this season's performance; it is weak evidence of a keeper's underlying ability, and year-to-year movement should be expected.</li>
+<li><strong>Strength of schedule is a team figure.</strong> A keeper gets credit for a top-ten opponent her team played even if she sat that game. The minutes threshold limits this.</li>
+<li><strong>Penalty strokes and shootouts</strong> enter save percentage only as the NCAA records them, which varies.</li>
+<li><strong>Minutes are not used.</strong> Per-game figures treat a 60-minute game and a 90-minute double-overtime game the same. Per-60 figures are the planned replacement.</li>
+<li><strong>Conference tournaments and the NCAA tournament are excluded.</strong> The rating covers the regular season.</li>
+</ul>
+
+<h2 id="roadmap">Roadmap</h2>
+<ul class="timeline">
+<li><span class="when">Version 1.0 · November 2026</span>Four factors, rank-sum, published NCAA data only. This release.</li>
+<li><span class="when">Version 1.1</span>Per-60 rates in place of per-game. Keeper-level schedule (only games she played). Three prior seasons rated with the same method to measure year-to-year stability.</li>
+<li><span class="when">Version 2.0</span>Shot-type adjustment: separate expected-goal values for penalty corners, penalty strokes, and open play, if box-score data can be assembled from play-by-play. This is the step ice hockey took in 2010 and it is the single largest improvement available.</li>
+<li><span class="when">Later</span>Shot location, if any conference or broadcaster begins publishing it. Field hockey's playing circle makes a location model simpler than ice hockey's, not harder.</li>
+</ul>
+</div></section>
+
+<footer><div class="wrap">The Keeper Index · Composite goalkeeper performance ratings for NCAA Division I field hockey · 2026 season, data through Nov. 3<br>
+Sources: <a href="https://www.ncaa.com/stats/fieldhockey/d1/current/individual/444">NCAA individual statistics</a>, <a href="https://www.ncaa.com/rankings/fieldhockey/d1/ncaa-field-hockey-rpi">NCAA RPI</a>, NCAA D1 scoreboard results · Built by John McKinley · <a href="about.html#disclosure">Disclosure</a> · <a href="data.html">Download the data</a> · <a href="https://github.com/jmckinley/fh-goalkeeper-ratings">Source on GitHub</a></div></footer>
+</body></html>

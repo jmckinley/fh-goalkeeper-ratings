@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lessons from other sports · The Keeper Index</title><meta name="description" content="What ice hockey, soccer, lacrosse, and baseball learned about measuring goalkeepers, and what field hockey can borrow.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">The Keeper <em>Index</em></a><nav class="main"><a href="index.html" class="">Overview</a><a href="rankings.html" class="">Rankings</a><a href="methodology.html" class="">Methodology</a><a href="lessons.html" class="on">Lessons from other sports</a><a href="data.html" class="">Data</a><a href="about.html" class="">About</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+<p class="kicker">Lessons from other sports</p>
+<h1>Every other goalkeeping sport has already <em>solved this</em></h1>
+<p class="lede">Ice hockey, soccer, and lacrosse each went through the same argument field hockey is having now: the statistics that are easy to count reward the defense, and the statistics that measure the keeper require separating her from it. The sequence they followed is the roadmap for this rating.</p>
+</div></div>
+<section><div class="wrap narrow">
+
+<h2>Ice hockey: three generations in fifteen years</h2>
+<h3>Generation 1 · Outcomes</h3>
+<p>Wins, goals-against average, shutouts. These were the Vezina Trophy criteria for most of the award's history, and NHL general managers, who vote on it, still cite them. A goalie on a strong possession team sees 24 shots a night and posts a 2.20 GAA. The same goalie on a weak team sees 34 and posts 2.90. He did not change.</p>
+<h3>Generation 2 · Save percentage, then shot-quality adjustment</h3>
+<p>Save percentage became the standard in the 1990s because it strips out shot volume. Its problem is the reverse: it treats every shot as equal. Starting around 2010, public analysts split shots by distance into low, medium, and high danger zones and computed save percentage within each. High-danger save percentage became the number worth quoting. This step required only shot location, which the NHL began recording in 2007.</p>
+<h3>Generation 3 · Goals saved above expected</h3>
+<p>The current standard, used by every NHL analytics department and the public sites (MoneyPuck, Evolving-Hockey, Natural Stat Trick). Each shot receives an expected-goal value from a model trained on location, angle, shot type, rebound, rush, and pre-shot movement. Sum the expected goals on every shot the goalie faced, subtract actual goals allowed, and the result is GSAx: how many goals he prevented relative to a league-average goalie facing the same shots. It is reported as a total and per 60 minutes.</p>
+<div class="callout teal"><strong>What this rating borrows:</strong> GSAA per game is GSAx with a flat expected value per shot instead of a modeled one. Same construction; the flat value is what the available data allows.</div>
+<h3>What ice hockey does not do, and why this rating does</h3>
+<p>GSAx already accounts for quality and volume, so NHL analysts do not add a separate workload term or a schedule term. Over 82 games every goalie faces a similar quality mix, and the model handles the rest. In a 16-game college season with schedules ranging from .38 to .63 in SOS, that assumption fails. The shots-faced and schedule factors here are doing work that an NHL model does implicitly.</p>
+<h3>The gap between analysts and voters persists</h3>
+<p>Vezina voting remains closer to Generation 1 than Generation 3. Goalies on playoff teams with high win totals win it. The NHL's experience is that better measurement does not change voting quickly; it changes how teams allocate money and ice time, and voting follows a decade later.</p>
+
+<h2>Soccer: post-shot expected goals</h2>
+<p>Soccer's version arrived through Opta and StatsBomb in the late 2010s. Standard expected goals (xG) values a shot at the moment it is taken, from location and situation. Post-shot expected goals (PSxG) revalues it after the shot is struck, using where it was headed in the frame and how fast. A keeper's quality is PSxG minus goals allowed: how many goals she prevented relative to average, given where the shots were actually going. A keeper who faces a season of shots aimed at the corners will have a high PSxG and gets credit for stopping them; a keeper who faces a season of shots aimed at her chest does not get credit for routine stops.</p>
+<p>The Premier League, FBref, and most European clubs now evaluate keepers primarily on PSxG minus goals allowed, per 90 minutes. The old measures (clean sheets, goals conceded) are reported but not used for decisions.</p>
+<div class="callout teal"><strong>What this rating borrows:</strong> the principle that the keeper is charged only for shots that reached her, and the per-time normalization (per 90 in soccer, per 60 in hockey, per game here with per-60 planned).</div>
+
+<h2>Lacrosse: the closest cousin, and the same gap</h2>
+<p>NCAA lacrosse publishes the same five goalkeeper statistics field hockey does, and has the same problem: save percentage leaders and GAA leaders are different people, and all-conference voting follows GAA and record. Lacrosse analysts have built goals-saved-above-average measures on exactly the flat-expected-value basis used here. Lacrosse's small-sample problem is worse (fewer games, more shots per game, bigger variance), and the standard advice from that community applies: treat single-season keeper ratings as a description of the season, not a projection of the player.</p>
+
+<h2>Baseball: the oldest version of the argument</h2>
+<p>Baseball separated pitcher performance from team defense in the early 2000s with fielding-independent pitching (FIP): a pitcher is measured only on strikeouts, walks, and home runs, the outcomes his fielders cannot affect. ERA, which depends on the defense, was demoted. The structure of the argument is identical to the goalkeeper case, and the outcome was the same: within a decade, every front office used the defense-independent measure and the award voting had partly followed.</p>
+
+<h2>What field hockey tracks today</h2>
+<p>The NCAA's goalkeeper leaderboards are goals-against average, save percentage, saves per game, shutouts, and goalie win-loss percentage. Box scores record saves and goals against per keeper, shots and penalty corners per team, and nothing about where a shot came from or whether it was a corner, a stroke, or open play. No conference publishes shot location. No public site publishes a keeper rating of any kind. Coaches' all-conference votes are made on the five NCAA statistics plus reputation.</p>
+<p>That is roughly where ice hockey stood in 2005. The first step, the one every sport above took first, is a rating that charges the keeper only for the shots that reached her and gives her credit for the ones she stopped relative to an average keeper. That is what this site does. The second step, shot quality, is waiting on data the sport does not yet record.</p>
+
+<h2>Five principles carried over</h2>
+<ol>
+<li><strong>Measure the keeper, not the defense.</strong> Any factor that rewards a team for allowing fewer shots is a team factor and is excluded or neutralized.</li>
+<li><strong>Charge only on shots that reached her.</strong> Goals prevented is computed against expected goals on shots faced, never against a league or team average of goals allowed.</li>
+<li><strong>Normalize for opportunity.</strong> Per game now, per 60 minutes next. A keeper's rate is what matters, not her total.</li>
+<li><strong>Test every candidate factor against the team ranking.</strong> If a rating reproduces the standings, it has failed. The methodology page reports this test for every variant.</li>
+<li><strong>Publish everything.</strong> The data, the formula, the rejected versions, and the conflicts of interest. The NHL analytics community earned trust by being reproducible before it was accepted.</li>
+</ol>
+</div></section>
+
+<footer><div class="wrap">The Keeper Index · Composite goalkeeper performance ratings for NCAA Division I field hockey · 2026 season, data through Nov. 3<br>
+Sources: <a href="https://www.ncaa.com/stats/fieldhockey/d1/current/individual/444">NCAA individual statistics</a>, <a href="https://www.ncaa.com/rankings/fieldhockey/d1/ncaa-field-hockey-rpi">NCAA RPI</a>, NCAA D1 scoreboard results · Built by John McKinley · <a href="about.html#disclosure">Disclosure</a> · <a href="data.html">Download the data</a> · <a href="https://github.com/jmckinley/fh-goalkeeper-ratings">Source on GitHub</a></div></footer>
+</body></html>
